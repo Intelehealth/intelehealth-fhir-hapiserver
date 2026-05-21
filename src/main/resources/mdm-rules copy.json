@@ -1,0 +1,89 @@
+{
+  "version": "1",
+  "mdmTypes": [
+    "Patient"
+  ],
+  "candidateSearchParams": [
+    {
+      "resourceType": "Patient",
+      "searchParams": [
+        "phone"
+      ]
+    },
+    {
+      "resourceType": "Patient",
+      "searchParams": [
+        "birthdate"
+      ]
+    },
+    {
+      "resourceType": "Patient",
+      "searchParams": [
+        "identifier"
+      ]
+    }
+  ],
+  "matchFields": [
+    {
+      "name": "birthday",
+      "resourceType": "Patient",
+      "resourcePath": "birthDate",
+      "matcher": {
+        "algorithm": "STRING"
+      }
+    },
+    {
+      "name": "phone",
+      "resourceType": "Patient",
+      "resourcePath": "telecom.where(system='phone').value",
+      "matcher": {
+        "algorithm": "STRING"
+      }
+    },
+    {
+      "name": "firstname-meta",
+      "resourceType": "Patient",
+      "fhirPath": "name.given.first()",
+      "matcher": {
+        "algorithm": "METAPHONE"
+      }
+    },
+    {
+      "name": "lastname-meta",
+      "resourceType": "Patient",
+      "resourcePath": "name.family",
+      "matcher": {
+        "algorithm": "METAPHONE"
+      }
+    },
+    {
+      "name": "firstname-jaro",
+      "resourceType": "Patient",
+      "resourcePath": "name.given",
+      "similarity": {
+        "algorithm": "JARO_WINKLER",
+        "matchThreshold": 0.8
+      }
+    },
+    {
+      "name": "lastname-jaro",
+      "resourceType": "Patient",
+      "resourcePath": "name.family",
+      "similarity": {
+        "algorithm": "JARO_WINKLER",
+        "matchThreshold": 0.8
+      }
+    }
+  ],
+  "matchResultMap": {
+    "firstname-meta,lastname-meta,birthday": "MATCH",
+    "firstname-meta,lastname-meta,phone": "MATCH",
+    "firstname-jaro,lastname-jaro,birthday": "POSSIBLE_MATCH",
+    "firstname-jaro,lastname-jaro,phone": "POSSIBLE_MATCH",
+    "lastname-jaro,phone,birthday": "POSSIBLE_MATCH",
+    "firstname-jaro,phone,birthday": "POSSIBLE_MATCH"
+  },
+  "eidSystems": {
+    "Patient": "urn:intelehealth:cruid"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "version": "1",
+  "mdmTypes": [
+    "Patient"
+  ],
+
+  "candidateSearchParams": [
+    {
+      "resourceType": "Patient",
+      "searchParams": [
+        "name"
+      ]
+    },
+    {
+      "resourceType": "Patient",
+      "searchParams": [
+        "birthdate"
+      ]
+    },
+    {
+      "resourceType": "Patient",
+      "searchParams": [
+        "phone"
+      ]
+    },
+    {
+      "resourceType": "Patient",
+      "searchParams": [
+        "identifier"
+      ]
+    }
+  ],
+
+  "matchFields": [
+    {
+      "name": "national-id-exact",
+      "resourceType": "Patient",
+      "resourcePath": "identifier.value",
+      "matcher": {
+        "algorithm": "IDENTIFIER"
+      }
+    },
+    {
+      "name": "given-name-jw",
+      "resourceType": "Patient",
+      "resourcePath": "name.given",
+      "similarity": {
+        "algorithm": "JARO_WINKLER",
+        "matchThreshold": 0.8
+      }
+    },
+    {
+      "name": "family-name-jw",
+      "resourceType": "Patient",
+      "resourcePath": "name.family",
+      "similarity": {
+        "algorithm": "JARO_WINKLER",
+        "matchThreshold": 0.8
+      }
+    },
+    {
+      "name": "given-name-metaphone",
+      "resourceType": "Patient",
+      "resourcePath": "name.given",
+      "matcher": {
+        "algorithm": "METAPHONE"
+      }
+    },
+    {
+      "name": "birthdate-exact",
+      "resourceType": "Patient",
+      "resourcePath": "birthDate",
+      "matcher": {
+        "algorithm": "STRING"
+      }
+    },
+    {
+      "name": "phone-exact",
+      "resourceType": "Patient",
+      "resourcePath": "telecom.value",
+      "matcher": {
+        "algorithm": "STRING"
+      }
+    },
+    {
+      "name": "gender-exact",
+      "resourceType": "Patient",
+      "resourcePath": "gender",
+      "matcher": {
+        "algorithm": "STRING"
+      }
+    }
+  ],
+
+  "matchResultMap": {
+    "national-id-exact": "MATCH",
+    "given-name-jw": "MATCH",
+    "family-name-jw": "MATCH",
+    "phone-exact": "MATCH",
+    "given-name-jw,family-name-jw": "POSSIBLE_MATCH",
+    "given-name-jw,family-name-jw,birthdate-exact,phone-exact": "MATCH",
+    "given-name-jw,family-name-jw,birthdate-exact,gender-exact": "MATCH",
+    "given-name-jw,family-name-jw,phone-exact": "POSSIBLE_MATCH",
+    "given-name-metaphone,family-name-jw,birthdate-exact,phone-exact": "POSSIBLE_MATCH",
+    "given-name-jw,birthdate-exact,gender-exact": "POSSIBLE_MATCH"
+  },
+
+  "eidSystems": {
+    "Patient": "http://hapifhir.io/fhir/NamingSystem/mdm-golden-resource-enterprise-id"
+  }
+}

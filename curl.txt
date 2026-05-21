@@ -1,0 +1,361 @@
+# 1
+curl -s -X POST "http://localhost:8080/fhir/Patient" \
+  -H "Content-Type: application/fhir+json" \
+  -d '{
+    "resourceType": "Patient",
+    "name": [{
+      "given": ["Aarav"],
+      "family": "Sharma"
+    }],
+    "birthDate": "1988-03-12",
+    "gender": "male",
+    "telecom": [{
+      "system": "phone",
+      "value": "+919800000001"
+    }],
+    "address": [{
+      "line": ["221 MG Road"],
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "postalCode": "560001",
+      "country": "India"
+    }]
+  }'
+  
+  
+  
+  
+  curl -s -X POST "http://localhost:8080/fhir/Patient" \
+  -H "Content-Type: application/fhir+json" \
+  -d '{
+    "resourceType": "Patient",
+    "name": [{
+      "given": ["patel"],
+      "family": "gill"
+    }],
+    "identifier": [ {
+        "system": "http://hapifhir.io/fhir/NamingSystem/mdm-golden-resource-enterprise-id",
+        "value": "ce487786-b183-4343-a639-7cc9c03802c2"
+      } ],
+    "birthDate": "1988-04-12",
+    "gender": "male",
+    "telecom": [{
+      "system": "phone",
+      "value": "+919800000001"
+    }],
+    "address": [{
+      "line": ["221 MG Road"],
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "postalCode": "560001",
+      "country": "India"
+    }]
+  }'
+
+# 2
+curl -s -X POST "http://localhost:8080/fhir/Patient" \
+  -H "Content-Type: application/fhir+json" \
+  -d '{
+    "resourceType": "Patient",
+    "name": [{
+      "given": ["Priya"],
+      "family": "Patel"
+    }],
+    "identifier": [ {
+        "system": "http://hapifhir.io/fhir/NamingSystem/mdm-golden-resource-enterprise-id",
+        "value": "ce487786-b183-4343-a639-7cc9c03802c2"
+      } ],
+    "birthDate": "1992-07-25",
+    "gender": "female",
+    "telecom": [{
+      "system": "phone",
+      "value": "+919800000002"
+    }],
+    "address": [{
+      "line": ["14 Ashram Road"],
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "postalCode": "380009",
+      "country": "India"
+    }]
+  }'
+
+# 3
+curl -s -X POST "http://localhost:8080/fhir/Patient" \
+  -H "Content-Type: application/fhir+json" \
+  -d '{
+    "resourceType": "Patient",
+    "name": [{
+      "given": ["Rahul"],
+      "family": "Verma"
+    }],
+    "birthDate": "1985-11-09",
+    "gender": "male",
+    "telecom": [{
+      "system": "phone",
+      "value": "+919800000003"
+    }],
+    "address": [{
+      "line": ["78 Park Street"],
+      "city": "Kolkata",
+      "state": "West Bengal",
+      "postalCode": "700016",
+      "country": "India"
+    }]
+  }'
+
+# 4
+curl -s -X POST "http://localhost:8080/fhir/Patient" \
+  -H "Content-Type: application/fhir+json" \
+  -d '{
+    "resourceType": "Patient",
+    "name": [{
+      "given": ["Ananya"],
+      "family": "Reddy"
+    }],
+    "birthDate": "1998-01-14",
+    "gender": "female",
+    "telecom": [{
+      "system": "phone",
+      "value": "+919800000004"
+    }],
+    "address": [{
+      "line": ["55 Jubilee Hills"],
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "postalCode": "500033",
+      "country": "India"
+    }]
+  }'
+
+# 5
+curl -s -X POST "http://localhost:8080/fhir/Patient" \
+  -H "Content-Type: application/fhir+json" \
+  -d '{
+    "resourceType": "Patient",
+    "name": [{
+      "given": ["Vikram"],
+      "family": "Singh"
+    }],
+    "birthDate": "1979-09-30",
+    "gender": "male",
+    "telecom": [{
+      "system": "phone",
+      "value": "+919800000005"
+    }],
+    "address": [{
+      "line": ["101 Hazratganj"],
+      "city": "Lucknow",
+      "state": "Uttar Pradesh",
+      "postalCode": "226001",
+      "country": "India"
+    }]
+  }'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  curl -s "http://localhost:8080/fhir/Patient/\$mdm-query-links?resourceId=Patient/SOURCE_ID"| jq '.parameter[].part'
+
+
+
+curl -X POST "http://localhost:8080/fhir/Patient" -H "Content-Type: application/fhir+json" -d '{
+  "resourceType": "Patient",
+  "active": true,
+  "name": [{"given": ["Abdur"], "family": "Rahim"}],
+  "telecom": [{"value": "01700000000"}]
+}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+curl -X POST "http://192.168.19.153:8888/fhir/\$mdm-match" \
+  -H "Content-Type: application/fhir+json" \
+  -H "Accept: application/fhir+json" \
+  --data '{
+    "resourceType": "Parameters",
+    "parameter": [
+      {
+        "name": "resource",
+        "resource": {
+          "resourceType": "Patient",
+          "name": [
+            {
+              "family": "Howlader",
+              "given": ["Alim"]
+            }
+          ],
+          "birthDate": "1996-05-11"
+
+        }
+      },
+      {
+        "name": "resourceType",
+        "valueString": "Patient"
+      }
+    ]
+  }'
+  
+  
+  
+  
+  
+  curl -X POST "http://localhost:8080/fhir/\$mdm-match" \
+  -H "Content-Type: application/fhir+json" \
+  -H "Accept: application/fhir+json" \
+  --data '{
+    "resourceType": "Parameters",
+    "parameter": [
+      {
+        "name": "resource",
+        "resource": {
+          "resourceType": "Patient",
+                "name": [ {
+        "family": "Sharma",
+        "given": [ "Aarav" ]
+      } ],
+      "telecom": [ {
+        "system": "phone",
+        "value": "+919800000001"
+      } ],
+      "gender": "male"
+       },
+      {
+        "name": "resourceType",
+        "valueString": "Patient"
+      }
+    ]
+  }'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  curl -X POST "http://192.168.19.153:8888/fhir/\$mdm-match" \
+  -H "Content-Type: application/fhir+json" \
+  -H "Accept: application/fhir+json" \
+  --data '{
+    "resourceType": "Parameters",
+    "parameter": [
+      {
+        "name": "resource",
+        "resource": {
+          "resourceType": "Patient",
+          "identifier": [
+            {
+              "system": "http://hospital.example.org/mrn",
+              "value": "MRN-10001"
+            }
+          ],
+          "name": [
+            {
+              "family": "Rahman",
+              "given": ["Karim"]
+            }
+          ]
+        }
+      },
+      {
+        "name": "resourceType",
+        "valueString": "Patient"
+      }
+    ]
+  }'
+  
+  
+  
+  
+  
+  
+  
+  curl -X POST "http://localhost:8080/fhir/\$mdm-match" \
+  -H "Content-Type: application/fhir+json" \
+  -H "Accept: application/fhir+json" \
+  -d '{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "resource",
+      "resource": {
+        "resourceType": "Patient",
+        "name": [
+          {
+            "family": "Sharma",
+            "given": [
+              "Aarav"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "+919800000001"
+          }
+        ],
+        "gender": "male"
+      }
+    },
+    {
+      "name": "resourceType",
+      "valueString": "Patient"
+    }
+  ]
+}'
+
+
+
+
+
+
+
+
+curl -X POST "http://localhost:8080/fhir/\$mdm-match" \
+  -H "Content-Type: application/fhir+json" \
+  -H "Accept: application/fhir+json" \
+  -d '{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "resource",
+      "resource": {
+        "resourceType": "Patient",
+        "name": [
+          {
+            "given": [
+              "Aarav"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "resourceType",
+      "valueString": "Patient"
+    }
+  ]
+}'
